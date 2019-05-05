@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kotlin.dao.HotWordMapper">
+  <resultMap id="BaseResultMap" type="com.kotlin.bean.HotWord">
+    <id column="hot_id" jdbcType="BIGINT" property="hotId" />
+    <result column="hot_name" jdbcType="VARCHAR" property="hotName" />
+    <result column="hot_description" jdbcType="VARCHAR" property="hotDescription" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    hot_id, hot_name, hot_description
+  </sql>
+  <select id="selectByExample" parameterType="com.kotlin.bean.example.HotWordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hotword
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hotword
+    where hot_id = #{hotId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from hotword
+    where hot_id = #{hotId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.kotlin.bean.example.HotWordExample">
+    delete from hotword
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.kotlin.bean.HotWord">
+    insert into hotword (hot_id, hot_name, hot_description
+      )
+    values (#{hotId,jdbcType=BIGINT}, #{hotName,jdbcType=VARCHAR}, #{hotDescription,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kotlin.bean.HotWord">
+    insert into hotword
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hotId != null">
+        hot_id,
+      </if>
+      <if test="hotName != null">
+        hot_name,
+      </if>
+      <if test="hotDescription != null">
+        hot_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hotId != null">
+        #{hotId,jdbcType=BIGINT},
+      </if>
+      <if test="hotName != null">
+        #{hotName,jdbcType=VARCHAR},
+      </if>
+      <if test="hotDescription != null">
+        #{hotDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.kotlin.bean.example.HotWordExample" resultType="java.lang.Long">
+    select count(*) from hotword
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hotword
+    <set>
+      <if test="record.hotId != null">
+        hot_id = #{record.hotId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hotName != null">
+        hot_name = #{record.hotName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hotDescription != null">
+        hot_description = #{record.hotDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hotword
+    set hot_id = #{record.hotId,jdbcType=BIGINT},
+      hot_name = #{record.hotName,jdbcType=VARCHAR},
+      hot_description = #{record.hotDescription,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kotlin.bean.HotWord">
+    update hotword
+    <set>
+      <if test="hotName != null">
+        hot_name = #{hotName,jdbcType=VARCHAR},
+      </if>
+      <if test="hotDescription != null">
+        hot_description = #{hotDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hot_id = #{hotId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kotlin.bean.HotWord">
+    update hotword
+    set hot_name = #{hotName,jdbcType=VARCHAR},
+      hot_description = #{hotDescription,jdbcType=VARCHAR}
+    where hot_id = #{hotId,jdbcType=BIGINT}
+  </update>
+</mapper>

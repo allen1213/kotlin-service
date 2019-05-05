@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kotlin.dao.VideoMapper">
+  <resultMap id="BaseResultMap" type="com.kotlin.bean.Video">
+    <id column="video_id" jdbcType="BIGINT" property="videoId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="audio_id" jdbcType="BIGINT" property="audioId" />
+    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="video_playUrl" jdbcType="VARCHAR" property="videoPlayurl" />
+    <result column="video_webUrl" jdbcType="VARCHAR" property="videoWeburl" />
+    <result column="video_cover" jdbcType="VARCHAR" property="videoCover" />
+    <result column="video_type" jdbcType="VARCHAR" property="videoType" />
+    <result column="video_tag" jdbcType="VARCHAR" property="videoTag" />
+    <result column="video_title" jdbcType="VARCHAR" property="videoTitle" />
+    <result column="video_description" jdbcType="VARCHAR" property="videoDescription" />
+    <result column="video_category" jdbcType="VARCHAR" property="videoCategory" />
+    <result column="video_status" jdbcType="VARCHAR" property="videoStatus" />
+    <result column="video_duration" jdbcType="BIGINT" property="videoDuration" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="like_count" jdbcType="BIGINT" property="likeCount" />
+    <result column="share_count" jdbcType="BIGINT" property="shareCount" />
+    <result column="comment_count" jdbcType="BIGINT" property="commentCount" />
+    <result column="video_width" jdbcType="BIGINT" property="videoWidth" />
+    <result column="video_height" jdbcType="BIGINT" property="videoHeight" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    video_id, user_id, audio_id, category_id, video_playUrl, video_webUrl, video_cover, 
+    video_type, video_tag, video_title, video_description, video_category, video_status, 
+    video_duration, createTime, like_count, share_count, comment_count, video_width, 
+    video_height
+  </sql>
+  <select id="selectByExample" parameterType="com.kotlin.bean.example.VideoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from video
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from video
+    where video_id = #{videoId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from video
+    where video_id = #{videoId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.kotlin.bean.example.VideoExample">
+    delete from video
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.kotlin.bean.Video">
+    insert into video (video_id, user_id, audio_id, 
+      category_id, video_playUrl, video_webUrl, 
+      video_cover, video_type, video_tag, 
+      video_title, video_description, video_category, 
+      video_status, video_duration, createTime, 
+      like_count, share_count, comment_count, 
+      video_width, video_height)
+    values (#{videoId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{audioId,jdbcType=BIGINT}, 
+      #{categoryId,jdbcType=BIGINT}, #{videoPlayurl,jdbcType=VARCHAR}, #{videoWeburl,jdbcType=VARCHAR}, 
+      #{videoCover,jdbcType=VARCHAR}, #{videoType,jdbcType=VARCHAR}, #{videoTag,jdbcType=VARCHAR}, 
+      #{videoTitle,jdbcType=VARCHAR}, #{videoDescription,jdbcType=VARCHAR}, #{videoCategory,jdbcType=VARCHAR}, 
+      #{videoStatus,jdbcType=VARCHAR}, #{videoDuration,jdbcType=BIGINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{likeCount,jdbcType=BIGINT}, #{shareCount,jdbcType=BIGINT}, #{commentCount,jdbcType=BIGINT}, 
+      #{videoWidth,jdbcType=BIGINT}, #{videoHeight,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kotlin.bean.Video">
+    insert into video
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="videoId != null">
+        video_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="audioId != null">
+        audio_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="videoPlayurl != null">
+        video_playUrl,
+      </if>
+      <if test="videoWeburl != null">
+        video_webUrl,
+      </if>
+      <if test="videoCover != null">
+        video_cover,
+      </if>
+      <if test="videoType != null">
+        video_type,
+      </if>
+      <if test="videoTag != null">
+        video_tag,
+      </if>
+      <if test="videoTitle != null">
+        video_title,
+      </if>
+      <if test="videoDescription != null">
+        video_description,
+      </if>
+      <if test="videoCategory != null">
+        video_category,
+      </if>
+      <if test="videoStatus != null">
+        video_status,
+      </if>
+      <if test="videoDuration != null">
+        video_duration,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="likeCount != null">
+        like_count,
+      </if>
+      <if test="shareCount != null">
+        share_count,
+      </if>
+      <if test="commentCount != null">
+        comment_count,
+      </if>
+      <if test="videoWidth != null">
+        video_width,
+      </if>
+      <if test="videoHeight != null">
+        video_height,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="videoId != null">
+        #{videoId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="audioId != null">
+        #{audioId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="videoPlayurl != null">
+        #{videoPlayurl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoWeburl != null">
+        #{videoWeburl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoCover != null">
+        #{videoCover,jdbcType=VARCHAR},
+      </if>
+      <if test="videoType != null">
+        #{videoType,jdbcType=VARCHAR},
+      </if>
+      <if test="videoTag != null">
+        #{videoTag,jdbcType=VARCHAR},
+      </if>
+      <if test="videoTitle != null">
+        #{videoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDescription != null">
+        #{videoDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="videoCategory != null">
+        #{videoCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="videoStatus != null">
+        #{videoStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDuration != null">
+        #{videoDuration,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="likeCount != null">
+        #{likeCount,jdbcType=BIGINT},
+      </if>
+      <if test="shareCount != null">
+        #{shareCount,jdbcType=BIGINT},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount,jdbcType=BIGINT},
+      </if>
+      <if test="videoWidth != null">
+        #{videoWidth,jdbcType=BIGINT},
+      </if>
+      <if test="videoHeight != null">
+        #{videoHeight,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.kotlin.bean.example.VideoExample" resultType="java.lang.Long">
+    select count(*) from video
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update video
+    <set>
+      <if test="record.videoId != null">
+        video_id = #{record.videoId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.audioId != null">
+        audio_id = #{record.audioId,jdbcType=BIGINT},
+      </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.videoPlayurl != null">
+        video_playUrl = #{record.videoPlayurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoWeburl != null">
+        video_webUrl = #{record.videoWeburl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoCover != null">
+        video_cover = #{record.videoCover,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoType != null">
+        video_type = #{record.videoType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoTag != null">
+        video_tag = #{record.videoTag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoTitle != null">
+        video_title = #{record.videoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoDescription != null">
+        video_description = #{record.videoDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoCategory != null">
+        video_category = #{record.videoCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoStatus != null">
+        video_status = #{record.videoStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoDuration != null">
+        video_duration = #{record.videoDuration,jdbcType=BIGINT},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.likeCount != null">
+        like_count = #{record.likeCount,jdbcType=BIGINT},
+      </if>
+      <if test="record.shareCount != null">
+        share_count = #{record.shareCount,jdbcType=BIGINT},
+      </if>
+      <if test="record.commentCount != null">
+        comment_count = #{record.commentCount,jdbcType=BIGINT},
+      </if>
+      <if test="record.videoWidth != null">
+        video_width = #{record.videoWidth,jdbcType=BIGINT},
+      </if>
+      <if test="record.videoHeight != null">
+        video_height = #{record.videoHeight,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update video
+    set video_id = #{record.videoId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      audio_id = #{record.audioId,jdbcType=BIGINT},
+      category_id = #{record.categoryId,jdbcType=BIGINT},
+      video_playUrl = #{record.videoPlayurl,jdbcType=VARCHAR},
+      video_webUrl = #{record.videoWeburl,jdbcType=VARCHAR},
+      video_cover = #{record.videoCover,jdbcType=VARCHAR},
+      video_type = #{record.videoType,jdbcType=VARCHAR},
+      video_tag = #{record.videoTag,jdbcType=VARCHAR},
+      video_title = #{record.videoTitle,jdbcType=VARCHAR},
+      video_description = #{record.videoDescription,jdbcType=VARCHAR},
+      video_category = #{record.videoCategory,jdbcType=VARCHAR},
+      video_status = #{record.videoStatus,jdbcType=VARCHAR},
+      video_duration = #{record.videoDuration,jdbcType=BIGINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      like_count = #{record.likeCount,jdbcType=BIGINT},
+      share_count = #{record.shareCount,jdbcType=BIGINT},
+      comment_count = #{record.commentCount,jdbcType=BIGINT},
+      video_width = #{record.videoWidth,jdbcType=BIGINT},
+      video_height = #{record.videoHeight,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kotlin.bean.Video">
+    update video
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="audioId != null">
+        audio_id = #{audioId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="videoPlayurl != null">
+        video_playUrl = #{videoPlayurl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoWeburl != null">
+        video_webUrl = #{videoWeburl,jdbcType=VARCHAR},
+      </if>
+      <if test="videoCover != null">
+        video_cover = #{videoCover,jdbcType=VARCHAR},
+      </if>
+      <if test="videoType != null">
+        video_type = #{videoType,jdbcType=VARCHAR},
+      </if>
+      <if test="videoTag != null">
+        video_tag = #{videoTag,jdbcType=VARCHAR},
+      </if>
+      <if test="videoTitle != null">
+        video_title = #{videoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDescription != null">
+        video_description = #{videoDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="videoCategory != null">
+        video_category = #{videoCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="videoStatus != null">
+        video_status = #{videoStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="videoDuration != null">
+        video_duration = #{videoDuration,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="likeCount != null">
+        like_count = #{likeCount,jdbcType=BIGINT},
+      </if>
+      <if test="shareCount != null">
+        share_count = #{shareCount,jdbcType=BIGINT},
+      </if>
+      <if test="commentCount != null">
+        comment_count = #{commentCount,jdbcType=BIGINT},
+      </if>
+      <if test="videoWidth != null">
+        video_width = #{videoWidth,jdbcType=BIGINT},
+      </if>
+      <if test="videoHeight != null">
+        video_height = #{videoHeight,jdbcType=BIGINT},
+      </if>
+    </set>
+    where video_id = #{videoId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kotlin.bean.Video">
+    update video
+    set user_id = #{userId,jdbcType=BIGINT},
+      audio_id = #{audioId,jdbcType=BIGINT},
+      category_id = #{categoryId,jdbcType=BIGINT},
+      video_playUrl = #{videoPlayurl,jdbcType=VARCHAR},
+      video_webUrl = #{videoWeburl,jdbcType=VARCHAR},
+      video_cover = #{videoCover,jdbcType=VARCHAR},
+      video_type = #{videoType,jdbcType=VARCHAR},
+      video_tag = #{videoTag,jdbcType=VARCHAR},
+      video_title = #{videoTitle,jdbcType=VARCHAR},
+      video_description = #{videoDescription,jdbcType=VARCHAR},
+      video_category = #{videoCategory,jdbcType=VARCHAR},
+      video_status = #{videoStatus,jdbcType=VARCHAR},
+      video_duration = #{videoDuration,jdbcType=BIGINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      like_count = #{likeCount,jdbcType=BIGINT},
+      share_count = #{shareCount,jdbcType=BIGINT},
+      comment_count = #{commentCount,jdbcType=BIGINT},
+      video_width = #{videoWidth,jdbcType=BIGINT},
+      video_height = #{videoHeight,jdbcType=BIGINT}
+    where video_id = #{videoId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectVideoByUserId" resultMap="BaseResultMap">
+
+    SELECT *
+    FROM VIDEO
+    WHERE USER_ID = #{userId}
+
+  </select>
+
+</mapper>
