@@ -1,6 +1,7 @@
 package com.kotlin.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
     private Long userId;
@@ -32,6 +33,17 @@ public class User {
     private Long shareCount;
 
     private Long roleId;
+
+    private List<Video> videoList;
+
+    public List<Video> getVideoList() {
+        return videoList;
+    }
+
+    public void setVideoList(List<Video> videoList) {
+        this.videoList = videoList;
+    }
+
 
     public Long getUserId() {
         return userId;
