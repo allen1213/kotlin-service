@@ -82,9 +82,21 @@ public class UserController {
     public Msg checkUserLogin(User user) {
 
         if (userService.checkUserLogin(user) != null) {
-            return Msg.success().add("userId",userService.checkUserLogin(user).getUserId());
+            return Msg.success().add("user",userService.checkUserLogin(user));
         }
         return Msg.fail();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/user/selectVideoWithUser")
+    public Msg selectVideoWithUser(@RequestParam(value = "pn" ,defaultValue = "1") Integer pn,String userId) {
+        PageHelper.startPage(pn,10);
+
+        List<User> list = userService.selectVideoWithUser(Long.parseLong(userId));
+
+        PageInfo page = new PageInfo(list,5);
+
+        return Msg.success().add("pageInfo",page);
     }
 
 }
