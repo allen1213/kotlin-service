@@ -41,6 +41,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public List<User> selectVideoWithUser(Long userId) {
+        return userMapper.selectVideoWithUser(userId);
+    }
+
+    @Override
     public User checkUserLogin(User user) {
         return userMapper.checkUserLogin(user);
     }

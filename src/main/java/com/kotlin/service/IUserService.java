@@ -19,4 +19,6 @@ public interface IUserService {
 
     User selectByPrimaryKey(Long userId);
 
+    List<User> selectVideoWithUser(Long userId);
+
 }
