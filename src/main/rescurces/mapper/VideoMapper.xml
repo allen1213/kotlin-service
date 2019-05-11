@@ -494,8 +494,10 @@
   <select id="selectVideoByUserId" resultMap="ResultMapWithUser">
 
     SELECT *
-    FROM VIDEO
-    WHERE USER_ID = #{userId}
+    FROM VIDEO V,USER U
+    WHERE V.USER_ID = U.USER_ID AND
+    V.USER_ID = #{userId}
+    ORDER BY V.VIDEO_ID DESC
 
   </select>
 
