@@ -447,7 +447,51 @@
     where video_id = #{videoId,jdbcType=BIGINT}
   </update>
 
-  <select id="selectVideoByUserId" resultMap="BaseResultMap">
+
+  <resultMap id="ResultMapWithUser" type="com.kotlin.bean.Video">
+    <id column="video_id" jdbcType="BIGINT" property="videoId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="audio_id" jdbcType="BIGINT" property="audioId" />
+    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="video_playUrl" jdbcType="VARCHAR" property="videoPlayurl" />
+    <result column="video_webUrl" jdbcType="VARCHAR" property="videoWeburl" />
+    <result column="video_cover" jdbcType="VARCHAR" property="videoCover" />
+    <result column="video_type" jdbcType="VARCHAR" property="videoType" />
+    <result column="video_tag" jdbcType="VARCHAR" property="videoTag" />
+    <result column="video_title" jdbcType="VARCHAR" property="videoTitle" />
+    <result column="video_description" jdbcType="VARCHAR" property="videoDescription" />
+    <result column="video_category" jdbcType="VARCHAR" property="videoCategory" />
+    <result column="video_status" jdbcType="VARCHAR" property="videoStatus" />
+    <result column="video_duration" jdbcType="BIGINT" property="videoDuration" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="like_count" jdbcType="BIGINT" property="likeCount" />
+    <result column="share_count" jdbcType="BIGINT" property="shareCount" />
+    <result column="comment_count" jdbcType="BIGINT" property="commentCount" />
+    <result column="video_width" jdbcType="BIGINT" property="videoWidth" />
+    <result column="video_height" jdbcType="BIGINT" property="videoHeight" />
+
+    <association property="user" javaType="com.kotlin.bean.User">
+      <id column="user_id" jdbcType="BIGINT" property="userId" />
+      <result column="user_name" jdbcType="VARCHAR" property="userName" />
+      <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+      <result column="user_avatar" jdbcType="VARCHAR" property="userAvatar" />
+      <result column="user_type" jdbcType="VARCHAR" property="userType" />
+      <result column="user_description" jdbcType="VARCHAR" property="userDescription" />
+      <result column="user_gender" jdbcType="VARCHAR" property="userGender" />
+      <result column="registDate" jdbcType="TIMESTAMP" property="registdate" />
+      <result column="video_count" jdbcType="BIGINT" property="videoCount" />
+      <result column="follow_count" jdbcType="BIGINT" property="followCount" />
+      <result column="fans_count" jdbcType="BIGINT" property="fansCount" />
+      <result column="collection_count" jdbcType="BIGINT" property="collectionCount" />
+      <result column="like_count" jdbcType="BIGINT" property="likeCount" />
+      <result column="share_count" jdbcType="BIGINT" property="shareCount" />
+      <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    </association>
+
+
+  </resultMap>
+
+  <select id="selectVideoByUserId" resultMap="ResultMapWithUser">
 
     SELECT *
     FROM VIDEO
