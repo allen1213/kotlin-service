@@ -22,7 +22,7 @@ public class VideoMapperTest {
         List<Video> list = videoMapper.selectVideoByUserId(Long.parseLong("1"));
         for (Video video:
              list) {
-            System.out.println(video.getUer().getUserName());
+            System.out.println(video.getUser().getRegistdate());
         }
     }
 
