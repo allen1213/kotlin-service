@@ -43,14 +43,14 @@ public class Video {
 
     private Long videoHeight;
 
-    private User uer;
+    private User user;
 
-    public User getUer() {
-        return uer;
+    public User getUser() {
+        return user;
     }
 
-    public void setUer(User uer) {
-        this.uer = uer;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getVideoId() {
