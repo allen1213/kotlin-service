@@ -133,7 +133,6 @@ public class VideoController {
 
                 if (videoService.insert(video) != 0 ){
                     isSuccess = true;
-                    System.out.println("插入成功~~~~~~~~~~~~~~~~~~~~~~~");
                 } else {
                     isSuccess = false;
                     return Msg.fail();
@@ -145,7 +144,6 @@ public class VideoController {
                     return Msg.fail();
 
             } else {
-                System.out.println("[--------------------------------]没有enctype=multipart/form-data");
                 return Msg.fail();
             }
 
@@ -155,6 +153,5 @@ public class VideoController {
 
         return Msg.fail();
     }
-
 
 }
