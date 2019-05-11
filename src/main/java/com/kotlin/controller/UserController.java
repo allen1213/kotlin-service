@@ -10,7 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -57,12 +63,51 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/user/update")
-    public Msg update(User user) {
+    public Msg update(HttpServletRequest request, User user) {
 
-        int count = userService.updateByPrimaryKeySelective(user);
+        try {
+            String path = "";
+            CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(
+                    request.getSession().getServletContext());
+
+            if(multipartResolver.isMultipart(request)) {
+
+                MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+                Iterator iter = multiRequest.getFileNames();
+
+                while (iter.hasNext()) {
+                    MultipartFile file = multiRequest.getFile(iter.next().toString());
+
+                    File userFile = new File("D:\\Code\\IDE\\kotlinMvp\\src\\main\\webapp\\user\\" + user.getUserId() + "\\");
+                    if (!userFile.exists()) {
+                        userFile.mkdirs();
+                    }
+
+                    if (file != null) {
+                        path = "D:\\Code\\IDE\\kotlinMvp\\src\\main\\webapp\\user\\" + user.getUserId() + "\\" + file.getOriginalFilename();
+                        //上传
+                        file.transferTo(new File(path));
+                    }
+                    System.out.println(path);
+
+                }
+            }
+
+            int count = userService.updateByPrimaryKeySelective(user);
+            if (count != 0) {
+                return Msg.success();
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Msg.fail();
+        }
+
+        /*int count = userService.updateByPrimaryKeySelective(user);
         if (count != 0) {
             return Msg.success();
-        }
+        }*/
         return Msg.fail();
     }
 
