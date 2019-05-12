@@ -27,4 +27,9 @@ public interface UserFansMapper {
     int updateByPrimaryKeySelective(UserFans record);
 
     int updateByPrimaryKey(UserFans record);
+
+    Integer selectFansCount(Long userId);
+
+    Integer selectFollowerCount(Long userId);
+
 }

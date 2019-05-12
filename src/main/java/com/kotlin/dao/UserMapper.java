@@ -31,9 +31,11 @@ public interface UserMapper {
 
     User checkUserLogin(User user);
 
-    /*@Select(value = "SELECT *\n" +
-            "    FROM USER U,VIDEO V\n" +
-            "    WHERE U.USER_ID = V.USER_ID\n" +
-            "    AND U.USER_ID = #{userId}")*/
     List<User> selectVideoWithUser(Long userId);
+
+    List<User> selectAllVideos(Long userId);
+
+    List<User> selectFans(Long userId);
+
+    List<User> selectFollowers(Long userId);
 }

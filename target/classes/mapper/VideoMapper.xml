@@ -494,9 +494,37 @@
   <select id="selectVideoByUserId" resultMap="ResultMapWithUser">
 
     SELECT *
+    FROM VIDEO V,USER U
+    WHERE V.USER_ID = U.USER_ID AND
+    V.USER_ID = #{userId}
+    ORDER BY V.VIDEO_ID DESC
+
+  </select>
+
+  <select id="selectVideoCountByUserId" resultType="java.lang.Integer">
+    SELECT COUNT(*)
     FROM VIDEO
     WHERE USER_ID = #{userId}
+  </select>
 
+
+  <select id="selectAllVideos" resultMap="ResultMapWithUser">
+    SELECT *
+    FROM USER U,VIDEO V
+    WHERE U.USER_ID = V.USER_ID
+    AND U.USER_ID &lt;&gt; #{userId}
+  </select>
+
+  <select id="selectMyFollowerVideos" resultMap="ResultMapWithUser">
+    SELECT *
+    FROM USER U,VIDEO V
+    WHERE U.USER_ID = V.USER_ID
+    AND V.USER_ID IN (
+            SELECT USER_ID
+            FROM USER_FANS
+            WHERE FANS_ID = #{userId}
+    )
+    ORDER BY V.VIDEO_ID DESC
   </select>
 
 </mapper>

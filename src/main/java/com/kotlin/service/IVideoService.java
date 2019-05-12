@@ -17,4 +17,6 @@ public interface IVideoService {
 
     int updateByPrimaryKeySelective(Video record);
 
+    Integer selectVideoCountByUserId(Long userId);
+
 }

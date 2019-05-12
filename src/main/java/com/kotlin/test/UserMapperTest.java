@@ -26,4 +26,36 @@ public class UserMapperTest {
 
     }
 
+    @Test
+    public void testSelectAllVideos() {
+        List<User> list = userMapper.selectAllVideos(Long.parseLong("0"));
+
+        System.out.println("the total size : "+list.size());
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("the user is "+list.get(i).getUserName()+" video list's size : "+list.get(i).getVideoList().size());
+
+            for (int j = 0; j < list.get(i).getVideoList().size(); j++) {
+                System.out.println(list.get(i).getVideoList().get(j).getVideoPlayurl());
+            }
+
+        }
+
+    }
+
+    @Test
+    public void testSelectFans() {
+        List<User> list = userMapper.selectFans(Long.parseLong("1"));
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).getUserName());
+        }
+    }
+
+    @Test
+    public void testSelectFollowers() {
+        List<User> list = userMapper.selectFollowers(Long.parseLong("1"));
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).getUserName());
+        }
+    }
+
 }

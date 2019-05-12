@@ -40,5 +40,8 @@ public class VideoServiceImpl implements IVideoService {
         return videoMapper.updateByPrimaryKeySelective(record);
     }
 
-
+    @Override
+    public Integer selectVideoCountByUserId(Long userId) {
+        return videoMapper.selectVideoCountByUserId(userId);
+    }
 }

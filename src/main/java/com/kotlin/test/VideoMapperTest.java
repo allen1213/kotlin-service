@@ -26,4 +26,24 @@ public class VideoMapperTest {
         }
     }
 
+    @Test
+    public void testSelectUserVideoCount() {
+
+        Integer count = videoMapper.selectVideoCountByUserId(Long.parseLong("1"));
+        System.out.println(count);
+
+    }
+
+    @Test
+    public void testSelectAllVideos() {
+        List<Video> list = videoMapper.selectAllVideos(Long.parseLong("0"));
+        System.out.println(list.size());
+
+    }
+
+    @Test
+    public void testSelectMyFollowerVideos() {
+        //videoMapper.selectMyFollowerVideos(Long.parseLong())
+    }
+
 }

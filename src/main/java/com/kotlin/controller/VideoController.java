@@ -65,6 +65,11 @@ public class VideoController {
         return Msg.success().add("pageInfo",page);
     }
 
+    /**
+     * 选择插入数据
+     * @param video
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/video/insert")
     public Msg insert(Video video) {
@@ -74,6 +79,11 @@ public class VideoController {
         return Msg.fail();
     }
 
+    /**
+     * 删除数据
+     * @param id
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/video/delete")
     public Msg deleteByPrimaryKey(String id) {
@@ -84,6 +94,11 @@ public class VideoController {
         return Msg.fail();
     }
 
+    /**
+     * 选择更新数据
+     * @param video
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/video/update")
     public Msg updateByPrimaryKeySelective(Video video) {
@@ -94,9 +109,15 @@ public class VideoController {
         return Msg.fail();
     }
 
+    /**
+     * 上传视频时，插入数据
+     * @param request
+     * @param video
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "video/upload")
-    public Msg uploadFile(HttpServletRequest request, HttpServletResponse response, Video video) {
+    public Msg uploadFile(HttpServletRequest request, Video video) {
 
         try {
 
@@ -152,6 +173,12 @@ public class VideoController {
         }
 
         return Msg.fail();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "video/videoCount")
+    public Msg selectVideoCountByUserId(String userId) {
+        return Msg.success().add("count",videoService.selectVideoCountByUserId(Long.parseLong(userId)));
     }
 
 }

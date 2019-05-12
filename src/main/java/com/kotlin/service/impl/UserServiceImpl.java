@@ -49,4 +49,19 @@ public class UserServiceImpl implements IUserService {
     public User checkUserLogin(User user) {
         return userMapper.checkUserLogin(user);
     }
+
+    @Override
+    public List<User> selectAllVideos(Long userId) {
+        return userMapper.selectAllVideos(userId);
+    }
+
+    @Override
+    public List<User> selectFans(Long userId) {
+        return userMapper.selectFans(userId);
+    }
+
+    @Override
+    public List<User> selectFollowers(Long userId) {
+        return userMapper.selectFollowers(userId);
+    }
 }

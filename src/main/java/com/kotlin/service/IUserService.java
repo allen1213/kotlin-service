@@ -21,4 +21,10 @@ public interface IUserService {
 
     List<User> selectVideoWithUser(Long userId);
 
+    List<User> selectAllVideos(Long userId);
+
+    List<User> selectFans(Long userId);
+
+    List<User> selectFollowers(Long userId);
+
 }

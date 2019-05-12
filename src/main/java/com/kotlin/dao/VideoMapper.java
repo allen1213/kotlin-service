@@ -30,4 +30,10 @@ public interface VideoMapper {
 
     List<Video> selectVideoByUserId(Long userId);
 
+    Integer selectVideoCountByUserId(Long userId);
+
+    List<Video> selectAllVideos(Long userId);
+
+    List<Video> selectMyFollowerVideos(Long userId);
+
 }

@@ -178,4 +178,22 @@
       fan_id = #{fanId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectFansCount" resultType="java.lang.Integer">
+
+    SELECT COUNT(*)
+    FROM USER_FANS
+    WHERE USER_ID = #{userId}
+
+  </select>
+
+  <select id="selectFollowerCount" resultType="java.lang.Integer">
+
+    SELECT COUNT(*)
+    FROM USER_FANS
+    WHERE FANS_ID = #{userId}
+
+  </select>
+
+
 </mapper>

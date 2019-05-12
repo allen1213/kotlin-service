@@ -144,4 +144,43 @@ public class UserController {
         return Msg.success().add("pageInfo",page);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/user/selectAllVideos")
+    public Msg selectAllVideos(@RequestParam(value = "pn" ,defaultValue = "1") Integer pn,String userId) {
+
+        PageHelper.startPage(pn,10);
+
+        List<User> list = userService.selectAllVideos(Long.parseLong(userId));
+
+        PageInfo page = new PageInfo(list,10);
+
+        return Msg.success().add("pageInfo",page);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/user/fans")
+    public Msg selectFans(@RequestParam(value = "pn" ,defaultValue = "1") Integer pn,String userId) {
+
+        PageHelper.startPage(pn,10);
+
+        List<User> list = userService.selectFans(Long.parseLong(userId));
+
+        PageInfo page = new PageInfo(list,10);
+
+        return Msg.success().add("pageInfo",page);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/user/followers")
+    public Msg selectFollowers(@RequestParam(value = "pn" ,defaultValue = "1") Integer pn,String userId) {
+
+        PageHelper.startPage(pn,10);
+
+        List<User> list = userService.selectFollowers(Long.parseLong(userId));
+
+        PageInfo page = new PageInfo(list,10);
+
+        return Msg.success().add("pageInfo",page);
+    }
+
 }
