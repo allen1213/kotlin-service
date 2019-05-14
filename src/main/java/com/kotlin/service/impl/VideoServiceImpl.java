@@ -44,4 +44,9 @@ public class VideoServiceImpl implements IVideoService {
     public Integer selectVideoCountByUserId(Long userId) {
         return videoMapper.selectVideoCountByUserId(userId);
     }
+
+    @Override
+    public List<Video> selectMyFollowerVideos(Long userId) {
+        return videoMapper.selectMyFollowerVideos(userId);
+    }
 }

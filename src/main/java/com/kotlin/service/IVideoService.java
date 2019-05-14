@@ -19,4 +19,6 @@ public interface IVideoService {
 
     Integer selectVideoCountByUserId(Long userId);
 
+    List<Video> selectMyFollowerVideos(Long userId);
+
 }

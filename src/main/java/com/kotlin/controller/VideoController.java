@@ -181,4 +181,16 @@ public class VideoController {
         return Msg.success().add("count",videoService.selectVideoCountByUserId(Long.parseLong(userId)));
     }
 
+    @ResponseBody
+    @RequestMapping(value = "video/selectMyFollowerVideos")
+    public Msg selectMyFollowerVideos(@RequestParam(value = "pn" ,defaultValue = "1") Integer pn,String userId) {
+        PageHelper.startPage(pn,10);
+
+        List<Video> list = videoService.selectMyFollowerVideos(Long.parseLong(userId));
+
+        PageInfo page = new PageInfo(list,10);
+
+        return Msg.success().add("pageInfo",page);
+    }
+
 }

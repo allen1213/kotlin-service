@@ -40,10 +40,10 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/user/selectUserById")
-    public Msg selectUserById(String id) {
+    public Msg selectUserById(String userId) {
 
-        if (userService.selectByPrimaryKey(Long.parseLong(id)) != null) {
-            return Msg.success();
+        if (userService.selectByPrimaryKey(Long.parseLong(userId)) != null) {
+            return Msg.success().add("user",userService.selectByPrimaryKey(Long.parseLong(userId)));
         }
         
         return Msg.fail();
