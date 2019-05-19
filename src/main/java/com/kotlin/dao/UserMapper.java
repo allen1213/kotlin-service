@@ -38,4 +38,6 @@ public interface UserMapper {
     List<User> selectFans(Long userId);
 
     List<User> selectFollowers(Long userId);
+
+    List<User> selectRecommendUser(Long userId);
 }

@@ -24,6 +24,7 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
+    private final static String UPLOAD_PATH = "D:\\Code\\IDE\\kotlinMvp\\src\\main\\webapp\\user\\";;
 
     @ResponseBody
     @RequestMapping(value = "/user/query")
@@ -78,13 +79,14 @@ public class UserController {
                 while (iter.hasNext()) {
                     MultipartFile file = multiRequest.getFile(iter.next().toString());
 
-                    File userFile = new File("D:\\Code\\IDE\\kotlinMvp\\src\\main\\webapp\\user\\" + user.getUserId() + "\\");
+
+                    File userFile = new File(UPLOAD_PATH + user.getUserId() + "\\");
                     if (!userFile.exists()) {
                         userFile.mkdirs();
                     }
 
                     if (file != null) {
-                        path = "D:\\Code\\IDE\\kotlinMvp\\src\\main\\webapp\\user\\" + user.getUserId() + "\\" + file.getOriginalFilename();
+                        path = UPLOAD_PATH + user.getUserId() + "\\" + file.getOriginalFilename();
                         //上传
                         file.transferTo(new File(path));
                     }
@@ -182,5 +184,19 @@ public class UserController {
 
         return Msg.success().add("pageInfo",page);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/user/selectRecommendUser")
+    public Msg selectRecommendUser(@RequestParam(value = "pn" ,defaultValue = "1") Integer pn,String userId) {
+
+        PageHelper.startPage(pn,10);
+
+        List<User> list = userService.selectRecommendUser(Long.parseLong(userId));
+
+        PageInfo page = new PageInfo(list,10);
+
+        return Msg.success().add("pageInfo",page);
+    }
+
 
 }

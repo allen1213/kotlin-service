@@ -64,4 +64,9 @@ public class UserServiceImpl implements IUserService {
     public List<User> selectFollowers(Long userId) {
         return userMapper.selectFollowers(userId);
     }
+
+    @Override
+    public List<User> selectRecommendUser(Long userId) {
+        return userMapper.selectRecommendUser(userId);
+    }
 }

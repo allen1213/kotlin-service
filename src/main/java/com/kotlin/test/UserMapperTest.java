@@ -58,4 +58,16 @@ public class UserMapperTest {
         }
     }
 
+    @Test
+    public void testSelectRecommendUser() {
+
+        List<User> list = userMapper.selectRecommendUser(Long.parseLong("1"));
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).getUserName());
+            for (int j = 0; j < list.get(i).getVideoList().size(); j++) {
+                System.out.println(list.get(i).getVideoList().get(j).getVideoPlayurl());
+            }
+        }
+    }
+
 }

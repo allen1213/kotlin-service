@@ -27,4 +27,6 @@ public interface IUserService {
 
     List<User> selectFollowers(Long userId);
 
+    List<User> selectRecommendUser(Long userId);
+
 }

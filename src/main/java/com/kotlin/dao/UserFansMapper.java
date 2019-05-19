@@ -32,4 +32,6 @@ public interface UserFansMapper {
 
     Integer selectFollowerCount(Long userId);
 
+    Integer deleteData(@Param("userId") Long userId, @Param("fanId")Long fanId);
+
 }

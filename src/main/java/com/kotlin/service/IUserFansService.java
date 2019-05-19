@@ -12,5 +12,6 @@ public interface IUserFansService {
 
     int insertSelective(UserFans record);
 
+    Integer deleteData(Long userId,Long fanId);
 
 }

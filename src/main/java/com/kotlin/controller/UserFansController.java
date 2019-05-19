@@ -42,12 +42,11 @@ public class UserFansController {
 
     @ResponseBody
     @RequestMapping(value = "/fans/delete")
-    public Msg delete(String id) {
+    public Msg delete(String userId,String fanId) {
 
-        if(userFansService.deleteByPrimaryKey(Long.parseLong(id)) != 0) {
+        if(userFansService.deleteData(Long.parseLong(userId),Long.parseLong(fanId)) != 0) {
             return Msg.success();
         }
-
         return Msg.fail();
     }
 

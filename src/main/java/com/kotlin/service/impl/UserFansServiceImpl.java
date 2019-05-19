@@ -31,4 +31,9 @@ public class UserFansServiceImpl implements IUserFansService {
     public int insertSelective(UserFans record) {
         return userFansMapper.insertSelective(record);
     }
+
+    @Override
+    public Integer deleteData(Long userId, Long fanId) {
+        return userFansMapper.deleteData(userId,fanId);
+    }
 }
