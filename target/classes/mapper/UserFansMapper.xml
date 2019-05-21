@@ -113,7 +113,7 @@
         user_id,
       </if>
       <if test="fanId != null">
-        fan_id,
+        fans_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -194,6 +194,11 @@
     WHERE FANS_ID = #{userId}
 
   </select>
+
+  <delete id="deleteData">
+    DELETE FROM USER_FANS
+    WHERE USER_ID = #{userId} AND FANS_ID = #{fanId}
+  </delete>
 
 
 </mapper>

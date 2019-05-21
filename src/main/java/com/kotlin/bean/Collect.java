@@ -1,5 +1,7 @@
 package com.kotlin.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Collect {
@@ -11,6 +13,7 @@ public class Collect {
 
     private Long videoId;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date collectTime;
 
     public Long getCollectId() {

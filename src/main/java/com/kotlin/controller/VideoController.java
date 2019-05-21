@@ -184,11 +184,14 @@ public class VideoController {
     @ResponseBody
     @RequestMapping(value = "video/selectMyFollowerVideos")
     public Msg selectMyFollowerVideos(@RequestParam(value = "pn" ,defaultValue = "1") Integer pn,String userId) {
-        PageHelper.startPage(pn,10);
+
+        //从pn页开始，每一页5条数据
+        PageHelper.startPage(pn,5);
 
         List<Video> list = videoService.selectMyFollowerVideos(Long.parseLong(userId));
 
-        PageInfo page = new PageInfo(list,10);
+        //将查询结果放到PageInfo中 给页面返回数据    5 为连续显示的页数
+        PageInfo page = new PageInfo(list,5);
 
         return Msg.success().add("pageInfo",page);
     }
